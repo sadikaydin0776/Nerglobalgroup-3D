@@ -4,6 +4,8 @@ import './globals.css';
 import { Header } from '@/components/Header';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { CustomCursor } from '@/components/CustomCursor';
+import { SmoothScrollProvider } from '@/components/SmoothScrollProvider';
+import { PageWrapper } from '@/components/PageWrapper';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -51,9 +53,13 @@ export default function RootLayout({
     <html lang="tr" className={`${inter.variable} ${playfair.variable}`}>
       <body>
         <CustomCursor />
-        <Header />
-        <main>{children}</main>
-        <WhatsAppButton />
+        <SmoothScrollProvider>
+          <PageWrapper>
+            <Header />
+            <main>{children}</main>
+            <WhatsAppButton />
+          </PageWrapper>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

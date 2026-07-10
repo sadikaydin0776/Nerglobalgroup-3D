@@ -3,11 +3,72 @@
 import { useEffect, useRef, useState } from 'react';
 
 const stats = [
-  { value: 500, suffix: '+', label: 'Uzman Personel', desc: 'Sertifikalı ve deneyimli' },
-  { value: 20, suffix: '+', label: 'Yıllık Deneyim', desc: 'Sektörde öncü konumda' },
-  { value: 7, suffix: '/24', label: 'Operasyon', desc: 'Kesintisiz hizmet garantisi' },
-  { value: 100, suffix: '+', label: 'Kurumsal Müşteri', desc: "Türkiye'nin önde gelenleri" },
+  {
+    value: 500,
+    suffix: '+',
+    label: 'Uzman Personel',
+    desc: 'Sertifikalı ve deneyimli',
+    bar: 92,
+    color: '#D4AF37',
+  },
+  {
+    value: 20,
+    suffix: '+',
+    label: 'Yıllık Deneyim',
+    desc: 'Sektörde öncü konum',
+    bar: 85,
+    color: '#3B82F6',
+  },
+  {
+    value: 100,
+    suffix: '+',
+    label: 'Kurumsal Müşteri',
+    desc: "Türkiye'nin liderleri",
+    bar: 78,
+    color: '#10B981',
+  },
+  {
+    value: 99,
+    suffix: '%',
+    label: 'Müşteri Memnuniyeti',
+    desc: 'Sürekli iyileştirme',
+    bar: 99,
+    color: '#8B5CF6',
+  },
 ];
+
+function AnimatedBar({ target, color, trigger }: { target: number; color: string; trigger: boolean }) {
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    if (!trigger) return;
+    const timer = setTimeout(() => {
+      let w = 0;
+      const step = () => {
+        w += (target - w) * 0.06;
+        setWidth(w);
+        if (Math.abs(target - w) > 0.3) requestAnimationFrame(step);
+        else setWidth(target);
+      };
+      requestAnimationFrame(step);
+    }, 200);
+    return () => clearTimeout(timer);
+  }, [target, trigger]);
+
+  return (
+    <div className="w-full h-[3px] bg-white/[0.06] rounded-full overflow-hidden mt-3">
+      <div
+        className="h-full rounded-full"
+        style={{
+          width: `${width}%`,
+          background: `linear-gradient(90deg, ${color}, ${color}aa)`,
+          boxShadow: `0 0 8px ${color}60`,
+          transition: 'width 0.05s linear',
+        }}
+      />
+    </div>
+  );
+}
 
 function StatCounter({ to, suffix }: { to: number; suffix: string }) {
   const [count, setCount] = useState(0);
@@ -20,12 +81,13 @@ function StatCounter({ to, suffix }: { to: number; suffix: string }) {
         if (entry.isIntersecting && !hasRun.current) {
           hasRun.current = true;
           const start = performance.now();
-          const duration = 1800;
+          const duration = 2000;
           const step = (now: number) => {
             const progress = Math.min((now - start) / duration, 1);
             const ease = 1 - Math.pow(2, -10 * progress);
             setCount(Math.floor(ease * to));
             if (progress < 1) requestAnimationFrame(step);
+            else setCount(to);
           };
           requestAnimationFrame(step);
         }
@@ -36,36 +98,52 @@ function StatCounter({ to, suffix }: { to: number; suffix: string }) {
     return () => observer.disconnect();
   }, [to]);
 
-  return (
-    <span ref={ref}>
-      {count}
-      {suffix}
-    </span>
-  );
+  return <span ref={ref}>{count}{suffix}</span>;
 }
 
 export function Stats() {
-  return (
-    <section className="relative w-full py-20 bg-primary overflow-hidden">
-      {/* Separator line */}
-      <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
-      <div className="absolute bottom-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+  const [triggered, setTriggered] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] bg-gold-400/[0.04] rounded-full blur-[100px] pointer-events-none" />
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setTriggered(true); },
+      { threshold: 0.3 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="relative w-full py-16 bg-[#04090F] overflow-hidden">
+      <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400/15 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.04] to-transparent" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[200px] pointer-events-none opacity-30"
+        style={{ background: 'radial-gradient(ellipse, rgba(212,175,55,0.06), transparent 70%)' }}
+      />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {stats.map((stat, idx) => (
-            <div key={idx} className="flex flex-col items-center text-center group">
-              <div className="text-4xl md:text-5xl lg:text-[56px] font-bold text-white tracking-tight mb-2 group-hover:text-gold-300 transition-colors duration-400">
+            <div key={idx} className="group flex flex-col">
+              {/* Number */}
+              <div
+                className="text-[42px] md:text-[52px] font-bold tracking-tight leading-none mb-1.5"
+                style={{ color: stat.color, filter: `drop-shadow(0 0 20px ${stat.color}30)` }}
+              >
                 <StatCounter to={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-[13px] font-semibold text-white/70 uppercase tracking-[0.2em] mb-1.5">
+
+              {/* Label */}
+              <div className="text-[13px] font-semibold text-white/65 uppercase tracking-[0.18em] mb-0.5">
                 {stat.label}
               </div>
-              <div className="text-[12px] text-white/30 font-light">{stat.desc}</div>
-              <div className="w-6 h-[2px] bg-gold-400/40 rounded-full mt-4 group-hover:w-12 group-hover:bg-gold-400 transition-all duration-400" />
+
+              {/* Desc */}
+              <div className="text-[12px] text-white/25 font-light mb-2">{stat.desc}</div>
+
+              {/* Animated bar */}
+              <AnimatedBar target={stat.bar} color={stat.color} trigger={triggered} />
             </div>
           ))}
         </div>
