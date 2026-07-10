@@ -71,9 +71,9 @@ export function Loader({ onComplete }: LoaderProps) {
           <Image
             src="/logo.png"
             alt="NEW GLOBAL GROUP"
-            width={220}
-            height={88}
-            className="h-20 w-auto object-contain"
+            width={400}
+            height={160}
+            className="h-36 md:h-44 w-auto object-contain"
             priority
           />
         </div>
