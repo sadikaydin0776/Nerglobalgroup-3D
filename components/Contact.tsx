@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { MapPin, Phone, Mail, Send, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 export function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
@@ -14,9 +14,23 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
-    // Simulate form submission
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus('sent');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setStatus('sent');
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -113,7 +127,25 @@ export function Contact() {
           <div className="glass-panel p-8 md:p-10 rounded-[28px] relative overflow-hidden">
             <div className="absolute top-0 left-[15%] right-[15%] h-[1px] bg-gradient-to-r from-transparent via-gold-400/20 to-transparent" />
 
-            {status === 'sent' ? (
+            {status === 'error' ? (
+              <div className="flex flex-col items-center justify-center h-full py-16 text-center">
+                <AlertCircle className="w-14 h-14 text-red-400 mb-5" strokeWidth={1.5} />
+                <h3 className="text-xl font-serif font-semibold text-white mb-3">
+                  Gönderilemedi
+                </h3>
+                <p className="text-white/45 font-light leading-relaxed text-sm max-w-xs">
+                  Bir hata oluştu. Lütfen{' '}
+                  <a href="tel:+905305980772" className="text-gold-400 hover:underline">+90 530 598 07 72</a>{' '}
+                  numaralı telefonu arayın veya WhatsApp üzerinden ulaşın.
+                </p>
+                <button
+                  onClick={() => setStatus('idle')}
+                  className="mt-7 px-7 h-[44px] bg-white/[0.06] text-white rounded-full font-medium hover:bg-white/[0.10] transition-colors text-sm"
+                >
+                  Tekrar Dene
+                </button>
+              </div>
+            ) : status === 'sent' ? (
               <div className="flex flex-col items-center justify-center h-full py-16 text-center">
                 <CheckCircle className="w-16 h-16 text-gold-400 mb-5" strokeWidth={1.5} />
                 <h3 className="text-2xl font-serif font-semibold text-white mb-3">
