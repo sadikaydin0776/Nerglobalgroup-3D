@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #07111F;
+  color: #ffffff;
+  font-family: var(--font-inter);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Hide default cursor globally */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #07111F;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F5D78B;
+}
+
+/* Glass panel base */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Gold gradient text */
+.gold-text {
+  background: linear-gradient(135deg, #F5D78B 0%, #D4AF37 50%, #A07830 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* GSAP timeline pulse dot */
+@keyframes goldPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); }
+}
+
+.pulse-gold {
+  animation: goldPulse 2s infinite;
+}
+
+/* Perspective for 3D cards */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Custom selection color */
+::selection {
+  background: rgba(212, 175, 55, 0.2);
+  color: #F5D78B;
+}
