@@ -16,14 +16,22 @@ export function Contact() {
     setStatus('sending');
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || '',
+          subject: `NEW GLOBAL GROUP — Yeni İletişim Talebi: ${form.name}`,
+          from_name: form.name,
+          email: form.email,
+          phone: form.phone || '—',
+          message: form.message,
+          botcheck: '',
+        }),
       });
 
       const data = await res.json();
-      if (res.ok && data.success) {
+      if (data.success) {
         setStatus('sent');
       } else {
         setStatus('error');
