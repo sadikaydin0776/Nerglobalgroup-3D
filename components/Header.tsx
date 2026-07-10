@@ -72,7 +72,7 @@ export function Header() {
               height={80}
               priority
               className={`w-auto object-contain transition-all duration-500 ${
-                isScrolled ? 'h-14 md:h-16' : 'h-20 md:h-24'
+                isScrolled ? 'h-20 md:h-24' : 'h-28 md:h-32 lg:h-36'
               }`}
             />
           </Link>
@@ -145,7 +145,7 @@ export function Header() {
             alt="NEW GLOBAL GROUP"
             width={120}
             height={48}
-            className="h-12 w-auto object-contain opacity-90"
+            className="h-16 w-auto object-contain opacity-90"
           />
           <button
             onClick={() => setIsMobileMenuOpen(false)}
