@@ -140,7 +140,7 @@ export function Faq() {
               Hemen Teklif Al
             </Link>
             <a
-              href="https://wa.me/905305980772?text=Merhaba%20NEW%20GLOBAL%20GROUP,%20web%20siteniz%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum.%20Hizmetleriniz%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum."
+              href="https://wa.me/905305980772?text=Say%C4%B1n%20NEW%20GLOBAL%20GROUP%20Yetkilileri%2C%0A%0AWeb%20siteniz%20%C3%BCzerinden%20ileti%C5%9Fime%20ge%C3%A7iyorum.%20G%C3%BCvenlik%2C%20tesis%20y%C3%B6netimi%20ve%20profesyonel%20hizmetleriniz%20hakk%C4%B1nda%20detayl%C4%B1%20bilgi%20almak%20ve%20i%C5%9Fletmemize%20%C3%B6zel%20bir%20teklif%20g%C3%B6r%C3%BC%C5%9Fmesi%20ger%C3%A7ekle%C5%9Ftirmek%20istiyorum.%0A%0A%C4%B0lginiz%20i%C3%A7in%20%C5%9Fimdiden%20te%C5%9Fekk%C3%BCr%20ederim.%0ASayg%C4%B1lar%C4%B1mla."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2.5 px-8 h-[54px] bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/20 rounded-full font-semibold hover:bg-[#25D366]/20 transition-all duration-300 hover:scale-[1.02]"
