@@ -53,10 +53,10 @@ export function Header() {
           transform: isVisible ? 'translateY(0)' : 'translateY(-110%)',
           transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease, height 0.4s ease',
         }}
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center px-6 md:px-10 lg:px-16 w-full ${
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center px-4 sm:px-6 md:px-10 lg:px-16 w-full ${
           isScrolled
-            ? 'h-[80px] bg-[rgba(7,17,31,0.75)] backdrop-blur-2xl border-b border-white/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.2)]'
-            : 'h-[110px] bg-transparent'
+            ? 'h-[64px] sm:h-[72px] bg-[rgba(7,17,31,0.85)] backdrop-blur-2xl border-b border-white/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.2)]'
+            : 'h-[80px] sm:h-[90px] bg-transparent'
         }`}
       >
         <div className="max-w-[1440px] w-full mx-auto flex items-center justify-between">
@@ -72,7 +72,7 @@ export function Header() {
               height={80}
               priority
               className={`w-auto object-contain transition-all duration-500 ${
-                isScrolled ? 'h-20 md:h-24' : 'h-28 md:h-32 lg:h-36'
+                isScrolled ? 'h-10 sm:h-12 md:h-14' : 'h-14 sm:h-16 md:h-20 lg:h-24'
               }`}
             />
           </Link>
