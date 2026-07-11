@@ -63,7 +63,7 @@ export function Faq() {
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className={`glass-panel rounded-[20px] overflow-hidden border transition-all duration-400 ${
+              className={`glass-panel rounded-[20px] overflow-hidden border transition-all duration-300 ${
                 openIndex === idx
                   ? 'bg-white/[0.04] border-white/[0.1] shadow-[0_16px_40px_rgba(0,0,0,0.35)]'
                   : 'bg-white/[0.02] border-white/[0.04] hover:border-white/[0.08]'
@@ -75,14 +75,14 @@ export function Faq() {
                 aria-expanded={openIndex === idx}
               >
                 <h3
-                  className={`text-[17px] font-semibold tracking-wide transition-colors duration-400 ${
+                  className={`text-[17px] font-semibold tracking-wide transition-colors duration-300 ${
                     openIndex === idx ? 'text-white' : 'text-white/65'
                   }`}
                 >
                   {faq.question}
                 </h3>
                 <div
-                  className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border transition-all duration-400 ${
+                  className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${
                     openIndex === idx
                       ? 'bg-gold-400/10 border-gold-400/30'
                       : 'bg-white/[0.03] border-white/[0.06]'

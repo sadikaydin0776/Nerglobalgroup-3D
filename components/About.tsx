@@ -198,11 +198,11 @@ export function About() {
 
                   {/* Icon */}
                   <div
-                    className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0 border border-white/[0.06] group-hover:scale-110 transition-all duration-400"
+                    className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0 border border-white/[0.06] group-hover:scale-110 transition-all duration-300"
                     style={{ background: `${item.color}10`, borderColor: `${item.color}20` }}
                   >
                     <item.icon
-                      className="w-4.5 h-4.5 transition-colors duration-400"
+                      className="w-[18px] h-[18px] transition-colors duration-300"
                       style={{ color: item.color }}
                       strokeWidth={1.5}
                     />
@@ -250,7 +250,7 @@ export function About() {
                 src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
                 alt="New Global Group Team"
                 fill
-                className="object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-1200 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                className="object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]"
                 sizes="(max-width: 1024px) 100vw, 54vw"
               />
             </div>

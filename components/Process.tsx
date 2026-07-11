@@ -170,7 +170,7 @@ export function Process() {
                 className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0"
                 style={{ background: `${step.color}15`, border: `1px solid ${step.color}25` }}
               >
-                <step.icon className="w-4.5 h-4.5" style={{ color: step.color }} strokeWidth={1.5} />
+                <step.icon className="w-[18px] h-[18px]" style={{ color: step.color }} strokeWidth={1.5} />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1.5">

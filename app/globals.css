@@ -7,7 +7,7 @@
   --font-playfair: 'Playfair Display', serif;
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -18,6 +18,7 @@ html {
   overflow-x: hidden;
   max-width: 100vw;
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -27,27 +28,27 @@ body {
   overflow-x: hidden;
   max-width: 100vw;
   cursor: none;
-  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Prevent images and media from overflowing */
+/* Media — never overflow */
 img, video, canvas, svg, iframe {
   max-width: 100%;
-  height: auto;
 }
 
-/* Only hide cursor on non-touch devices */
+/* Video must fill its container */
+video {
+  display: block;
+}
+
+/* Custom cursor — only on pointer devices */
 @media (pointer: fine) {
-  *, *::before, *::after {
-    cursor: none !important;
-  }
+  *, *::before, *::after { cursor: none !important; }
 }
-
-/* Touch devices: restore default cursor */
 @media (pointer: coarse) {
-  *, *::before, *::after {
-    cursor: auto !important;
-  }
+  body { cursor: auto; }
+  *, *::before, *::after { cursor: auto !important; }
 }
 
 /* ───── Scrollbar ───── */
@@ -58,22 +59,24 @@ img, video, canvas, svg, iframe {
   border-radius: 2px;
 }
 
-/* ───── Selection ───── */
+/* ───── Text selection ───── */
 ::selection {
   background: rgba(212,175,55,0.2);
   color: #F5D78B;
 }
 
-/* ───── Noise texture overlay ───── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9995;
-  pointer-events: none;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  background-size: 180px;
+/* ───── Noise texture — desktop only (GPU-expensive) ───── */
+@media (pointer: fine) {
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9995;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 180px;
+  }
 }
 
 /* ───── Glass panel ───── */
@@ -101,3 +104,10 @@ body::before {
 
 /* ───── Perspective ───── */
 .perspective-1000 { perspective: 1000px; }
+
+/* ───── Focus visible (accessibility) ───── */
+:focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

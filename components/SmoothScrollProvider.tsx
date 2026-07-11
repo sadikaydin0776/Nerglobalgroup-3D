@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let lenis: any;
 
     const init = async () => {

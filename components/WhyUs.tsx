@@ -98,7 +98,7 @@ export function WhyUs() {
                   className="flex items-center gap-3 text-left transition-all duration-300 group"
                 >
                   <span
-                    className="block h-[2px] rounded-full transition-all duration-400"
+                    className="block h-[2px] rounded-full transition-all duration-300"
                     style={{
                       width: activeIdx === i ? '28px' : '12px',
                       background: activeIdx === i ? r.color : 'rgba(255,255,255,0.15)',
@@ -121,7 +121,7 @@ export function WhyUs() {
               <div
                 key={idx}
                 ref={(el) => { itemRefs.current[idx] = el; }}
-                className="group glass-panel rounded-[24px] overflow-hidden transition-all duration-400"
+                className="group glass-panel rounded-[24px] overflow-hidden transition-all duration-300"
                 style={{
                   opacity: visibleItems[idx] ? 1 : 0,
                   transform: visibleItems[idx] ? 'translateX(0)' : 'translateX(40px)',
@@ -142,7 +142,7 @@ export function WhyUs() {
 
                   {/* Icon */}
                   <div
-                    className="w-11 h-11 rounded-[12px] flex items-center justify-center shrink-0 border transition-all duration-400 group-hover:scale-110"
+                    className="w-11 h-11 rounded-[12px] flex items-center justify-center shrink-0 border transition-all duration-300 group-hover:scale-110"
                     style={{
                       background: `${reason.color}10`,
                       borderColor: `${reason.color}20`,

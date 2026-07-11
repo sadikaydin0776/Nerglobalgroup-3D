@@ -63,26 +63,31 @@ export function Hero() {
       )}
 
       {/* BG video (muted, autoplay, loop) */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 z-[1] w-full h-full object-cover"
-        style={{ opacity: 0.25 }}
-        poster="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
-      >
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-skyscrapers-and-a-highway-at-sunset-34562-large.mp4" type="video/mp4" />
-        {/* Fallback image if video fails */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2940&auto=format&fit=crop')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-      </video>
+      {/* Fallback BG for all devices */}
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.3,
+        }}
+      />
+      {/* Video — desktop only, loads lazily */}
+      {isDesktop && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          className="absolute inset-0 z-[2] w-full h-full object-cover"
+          style={{ opacity: 0.22 }}
+          poster="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
+        >
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-skyscrapers-and-a-highway-at-sunset-34562-large.mp4" type="video/mp4" />
+        </video>
+      )}
 
       {/* Gradients */}
       <div className="absolute inset-0 z-[2] pointer-events-none"

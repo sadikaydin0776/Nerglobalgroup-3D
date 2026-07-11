@@ -133,7 +133,7 @@ function TiltCard({ service, index }: { service: typeof services[0]; index: numb
         {/* Tag */}
         <div className="mb-6 flex items-center justify-between">
           <div
-            className="w-13 h-13 w-[52px] h-[52px] rounded-[14px] flex items-center justify-center border transition-all duration-500 group-hover:scale-110"
+            className="w-[52px] h-[52px] rounded-[14px] flex items-center justify-center border transition-all duration-500 group-hover:scale-110"
             style={{
               background: `${service.color}12`,
               borderColor: `${service.color}25`,
@@ -160,7 +160,7 @@ function TiltCard({ service, index }: { service: typeof services[0]; index: numb
         <h3 className="text-[19px] font-serif font-semibold text-white mb-3 tracking-tight group-hover:text-white transition-colors">
           {service.title}
         </h3>
-        <p className="text-white/40 font-light leading-relaxed text-[14px] group-hover:text-white/55 transition-colors duration-400">
+        <p className="text-white/40 font-light leading-relaxed text-[14px] group-hover:text-white/55 transition-colors duration-300">
           {service.description}
         </p>
       </div>
@@ -181,7 +181,7 @@ function TiltCard({ service, index }: { service: typeof services[0]; index: numb
           ))}
         </div>
         <span
-          className="text-[11px] uppercase tracking-widest font-semibold flex items-center gap-2 transition-all duration-400 group-hover:gap-3"
+          className="text-[11px] uppercase tracking-widest font-semibold flex items-center gap-2 transition-all duration-300 group-hover:gap-3"
           style={{ color: service.color }}
         >
           DETAYLAR
