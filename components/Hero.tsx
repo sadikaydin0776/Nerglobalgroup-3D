@@ -42,7 +42,7 @@ export function Hero() {
     <section
       ref={heroRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-[100svh] w-full flex items-center justify-center overflow-hidden bg-[#04090F] pt-24 pb-16"
+      className="relative min-h-[100svh] w-full max-w-[100vw] flex items-center justify-center overflow-hidden bg-[#04090F] pt-24 pb-16"
     >
       {/* Three.js particles */}
       <ParticleField className="absolute inset-0 z-0" />
@@ -53,8 +53,6 @@ export function Hero() {
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2940&auto=format&fit=crop')",
-          transform: `translate(${mousePos.x * -8}px, ${mousePos.y * -6}px) scale(1.1)`,
-          transition: 'transform 0.7s cubic-bezier(0.22,1,0.36,1)',
           opacity: 0.3,
         }}
       />

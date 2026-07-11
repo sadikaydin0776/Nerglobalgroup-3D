@@ -59,12 +59,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="overflow-x-hidden">
+      <body className="overflow-x-hidden w-full max-w-[100vw]">
         <CustomCursor />
         <SmoothScrollProvider>
           <PageWrapper>
             <Header />
-            <main>{children}</main>
+            <main className="overflow-x-hidden w-full">{children}</main>
             <WhatsAppButton />
           </PageWrapper>
         </SmoothScrollProvider>

@@ -20,7 +20,7 @@ export function Marquee({ reverse = false }: MarqueeProps) {
   const doubled = [...items, ...items];
 
   return (
-    <div className="relative w-full py-5 overflow-hidden bg-[#04090F] border-y border-white/[0.04]">
+    <div className="relative w-full max-w-[100vw] py-5 overflow-hidden bg-[#04090F] border-y border-white/[0.04]">
       {/* Left fade */}
       <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#04090F] to-transparent z-10 pointer-events-none" />
       {/* Right fade */}
