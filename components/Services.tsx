@@ -11,6 +11,7 @@ const services = [
     icon: ShieldCheck,
     color: '#3B82F6',
     tag: '7/24 Aktif',
+    slug: 'profesyonel-guvenlik',
   },
   {
     title: 'Profesyonel Temizlik',
@@ -18,6 +19,7 @@ const services = [
     icon: Sparkles,
     color: '#10B981',
     tag: 'ISO Sertifikalı',
+    slug: 'profesyonel-temizlik',
   },
   {
     title: 'Personel Tedarik',
@@ -25,6 +27,7 @@ const services = [
     icon: Users,
     color: '#8B5CF6',
     tag: '500+ Personel',
+    slug: 'personel-tedarik',
   },
   {
     title: 'Tesis Yönetimi',
@@ -32,6 +35,7 @@ const services = [
     icon: Building2,
     color: '#F59E0B',
     tag: 'Entegre Sistem',
+    slug: 'tesis-yonetimi',
   },
   {
     title: 'Kurumsal Danışmanlık',
@@ -39,6 +43,7 @@ const services = [
     icon: Briefcase,
     color: '#D4AF37',
     tag: 'Stratejik',
+    slug: 'kurumsal-danismanlik',
   },
   {
     title: 'Teknoloji Çözümleri',
@@ -46,6 +51,7 @@ const services = [
     icon: Cpu,
     color: '#06B6D4',
     tag: 'AI Destekli',
+    slug: 'teknoloji-cozumleri',
   },
 ];
 
@@ -180,13 +186,14 @@ function TiltCard({ service, index }: { service: typeof services[0]; index: numb
             />
           ))}
         </div>
-        <span
+        <Link
+          href={`/hizmetler/${service.slug}`}
           className="text-[11px] uppercase tracking-widest font-semibold flex items-center gap-2 transition-all duration-300 group-hover:gap-3"
           style={{ color: service.color }}
         >
           DETAYLAR
           <ArrowRight className="w-3 h-3" />
-        </span>
+        </Link>
       </div>
     </div>
   );

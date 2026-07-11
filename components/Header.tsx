@@ -12,6 +12,7 @@ const navLinks = [
   { name: 'Hizmetler', href: '/hizmetler' },
   { name: 'S.S.S.', href: '/sss' },
   { name: 'İletişim', href: '/iletisim' },
+  { name: 'Teklif Hesapla', href: '/teklif-hesapla' },
 ];
 
 export function Header() {
