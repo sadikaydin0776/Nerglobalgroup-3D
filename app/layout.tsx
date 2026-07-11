@@ -10,6 +10,7 @@ import { FloatingCTA } from '@/components/FloatingCTA';
 import { InstallBanner } from '@/components/InstallBanner';
 import { VisitorBadge } from '@/components/VisitorBadge';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
+import { ScrollProgress } from '@/components/ScrollProgress';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -160,6 +161,7 @@ export default function RootLayout({
       </head>
       <body className="overflow-x-hidden w-full max-w-[100vw]">
         <CustomCursor />
+        <ScrollProgress />
         <SmoothScrollProvider>
           <PageWrapper>
             <Header />

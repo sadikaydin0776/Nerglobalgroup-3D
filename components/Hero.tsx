@@ -97,6 +97,26 @@ export function Hero() {
         style={{ background: 'linear-gradient(to top, rgba(4,9,15,1) 0%, transparent 50%)' }}
       />
 
+      {/* Gradient mesh orbs */}
+      <div className="absolute z-[2] pointer-events-none" style={{
+        top: '15%', left: '55%', width: '500px', height: '500px',
+        background: 'radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 60%)',
+        filter: 'blur(60px)',
+        animation: 'orbFloat1 18s ease-in-out infinite',
+      }} />
+      <div className="absolute z-[2] pointer-events-none" style={{
+        top: '50%', left: '30%', width: '400px', height: '400px',
+        background: 'radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 60%)',
+        filter: 'blur(80px)',
+        animation: 'orbFloat2 22s ease-in-out infinite',
+      }} />
+      <div className="absolute z-[2] pointer-events-none" style={{
+        bottom: '10%', right: '20%', width: '350px', height: '350px',
+        background: 'radial-gradient(circle, rgba(139,92,246,0.05) 0%, transparent 60%)',
+        filter: 'blur(70px)',
+        animation: 'orbFloat3 16s ease-in-out infinite',
+      }} />
+
       {/* Desktop-only gold ambient */}
       {isDesktop && (
         <div
@@ -140,7 +160,7 @@ export function Hero() {
             <span className="block">
               Kurumsal{' '}
               <span
-                className="gold-text"
+                className="animated-gold-text"
                 style={{
                   opacity: wordVisible ? 1 : 0,
                   transition: 'opacity 0.35s ease',

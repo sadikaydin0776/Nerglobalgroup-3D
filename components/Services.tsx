@@ -139,7 +139,7 @@ function TiltCard({ service, index }: { service: typeof services[0]; index: numb
         {/* Tag */}
         <div className="mb-6 flex items-center justify-between">
           <div
-            className="w-[52px] h-[52px] rounded-[14px] flex items-center justify-center border transition-all duration-500 group-hover:scale-110"
+            className="w-[52px] h-[52px] rounded-[14px] flex items-center justify-center border transition-all duration-500 group-hover:scale-110 icon-hover"
             style={{
               background: `${service.color}12`,
               borderColor: `${service.color}25`,
