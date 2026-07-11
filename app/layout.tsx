@@ -157,9 +157,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
         />
-        <GoogleAnalytics />
       </head>
       <body className="overflow-x-hidden w-full max-w-[100vw]">
+        <GoogleAnalytics />
         <CustomCursor />
         <ScrollProgress />
         <SmoothScrollProvider>
