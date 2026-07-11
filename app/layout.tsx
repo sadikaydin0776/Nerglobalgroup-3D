@@ -6,6 +6,7 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { CustomCursor } from '@/components/CustomCursor';
 import { SmoothScrollProvider } from '@/components/SmoothScrollProvider';
 import { PageWrapper } from '@/components/PageWrapper';
+import { FloatingCTA } from '@/components/FloatingCTA';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -66,6 +67,7 @@ export default function RootLayout({
             <Header />
             <main className="overflow-x-hidden w-full">{children}</main>
             <WhatsAppButton />
+            <FloatingCTA />
           </PageWrapper>
         </SmoothScrollProvider>
       </body>

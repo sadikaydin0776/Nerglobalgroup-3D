@@ -2,6 +2,7 @@ import { Hero } from '@/components/Hero';
 import { Marquee } from '@/components/Marquee';
 import { Stats } from '@/components/Stats';
 import { Services } from '@/components/Services';
+import { Process } from '@/components/Process';
 import { About } from '@/components/About';
 import { WhyUs } from '@/components/WhyUs';
 import { Marquee as MarqueeReverse } from '@/components/Marquee';
@@ -16,6 +17,7 @@ export default function HomePage() {
       <Marquee />
       <Stats />
       <Services />
+      <Process />
       <About />
       <WhyUs />
       <MarqueeReverse reverse />

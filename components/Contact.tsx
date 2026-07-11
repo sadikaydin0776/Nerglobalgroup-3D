@@ -247,6 +247,20 @@ export function Contact() {
             )}
           </div>
         </div>
+
+        {/* Google Maps */}
+        <div className="mt-12 rounded-[24px] overflow-hidden border border-white/[0.06]" style={{ height: '320px' }}>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.3!2d28.6724!3d41.0201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa4a3b4b4b4b4%3A0x0!2sCumhuriyet+Mah.+%C5%9Eehitler+Cad.+Concepta+Plaza+Sitesi+B+Blok+No%3A+9%2F1+Esenyurt+%C4%B0stanbul!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str&q=Concepta+Plaza+Esenyurt+Istanbul"
+            width="100%"
+            height="100%"
+            style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) brightness(0.85) contrast(0.9)' }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="NEW GLOBAL GROUP Ofis Konumu"
+          />
+        </div>
       </div>
     </section>
   );
