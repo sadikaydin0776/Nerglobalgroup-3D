@@ -20,17 +20,16 @@ export function Hero() {
   const [isDesktop, setIsDesktop] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
 
-  // Lazy import Three.js only on desktop
-  const [ParticleField, setParticleField] = useState<React.ComponentType<{ className: string }> | null>(null);
+  // Load particles on ALL devices (mobile gets fewer particles via isMobile prop)
+  const [ParticleField, setParticleField] = useState<React.ComponentType<{ className: string; mobile?: boolean }> | null>(null);
 
   useEffect(() => {
     setMounted(true);
     const desktop = window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches;
     setIsDesktop(desktop);
 
-    if (desktop) {
-      import('./ParticleField').then((mod) => setParticleField(() => mod.ParticleField));
-    }
+    // Load particles on all devices
+    import('./ParticleField').then((mod) => setParticleField(() => mod.ParticleField));
 
     const cycle = setInterval(() => {
       setWordVisible(false);
@@ -58,8 +57,9 @@ export function Hero() {
       style={{ minHeight: '100svh' }}
     >
       {/* Three.js — desktop only */}
-      {isDesktop && ParticleField && (
-        <ParticleField className="absolute inset-0 z-0" />
+      {/* Particles — desktop: full neural net, mobile: lightweight */}
+      {ParticleField && (
+        <ParticleField className="absolute inset-0 z-0" mobile={!isDesktop} />
       )}
 
       {/* BG video (muted, autoplay, loop) */}

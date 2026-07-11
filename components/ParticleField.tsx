@@ -10,11 +10,11 @@ interface MouseRef {
 }
 
 // Neural network: particles + connecting lines
-function NeuralNet({ mouse }: { mouse: React.MutableRefObject<MouseRef> }) {
+function NeuralNet({ mouse, mobile = false }: { mouse: React.MutableRefObject<MouseRef>; mobile?: boolean }) {
   const groupRef = useRef<THREE.Group>(null);
   const pointsRef = useRef<THREE.Points>(null);
   const linesRef = useRef<THREE.LineSegments>(null);
-  const COUNT = 120;
+  const COUNT = mobile ? 55 : 120;
 
   const { nodes, positions, velocities } = useMemo(() => {
     const nodes: THREE.Vector3[] = [];
@@ -151,9 +151,9 @@ function NeuralNet({ mouse }: { mouse: React.MutableRefObject<MouseRef> }) {
 }
 
 // Ambient floating particles background
-function AmbientParticles({ mouse }: { mouse: React.MutableRefObject<MouseRef> }) {
+function AmbientParticles({ mouse, mobile = false }: { mouse: React.MutableRefObject<MouseRef>; mobile?: boolean }) {
   const meshRef = useRef<THREE.Points>(null);
-  const COUNT = 600;
+  const COUNT = mobile ? 180 : 600;
 
   const { positions, speeds } = useMemo(() => {
     const positions = new Float32Array(COUNT * 3);
@@ -240,7 +240,7 @@ function GridPlane({ mouse }: { mouse: React.MutableRefObject<MouseRef> }) {
   );
 }
 
-export function ParticleField({ className }: { className?: string }) {
+export function ParticleField({ className, mobile = false }: { className?: string; mobile?: boolean }) {
   const mouse = useRef<MouseRef>({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -253,15 +253,15 @@ export function ParticleField({ className }: { className?: string }) {
   }, []);
 
   return (
-    <div className={className}>
+    <div className={className} style={{ overflow: 'hidden' }}>
       <Canvas
         camera={{ position: [0, 0, 6], fov: 70 }}
         gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
-        dpr={[1, 1.5]}
+        dpr={mobile ? [1, 1] : [1, 1.5]}
       >
-        <GridPlane mouse={mouse} />
-        <NeuralNet mouse={mouse} />
-        <AmbientParticles mouse={mouse} />
+        {!mobile && <GridPlane mouse={mouse} />}
+        <NeuralNet mouse={mouse} mobile={mobile} />
+        <AmbientParticles mouse={mouse} mobile={mobile} />
       </Canvas>
     </div>
   );
