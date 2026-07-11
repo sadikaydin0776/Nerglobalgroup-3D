@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Users, ShieldCheck, MapPin, ChevronDown } from 'lucide-react';
-import { ParticleField } from './ParticleField';
 
 const stats = [
   { value: '500+', label: 'Uzman Personel', icon: Users },
@@ -18,10 +17,21 @@ export function Hero() {
   const [mounted, setMounted] = useState(false);
   const [wordIdx, setWordIdx] = useState(0);
   const [wordVisible, setWordVisible] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
+
+  // Lazy import Three.js only on desktop
+  const [ParticleField, setParticleField] = useState<React.ComponentType<{ className: string }> | null>(null);
 
   useEffect(() => {
     setMounted(true);
+    const desktop = window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches;
+    setIsDesktop(desktop);
+
+    if (desktop) {
+      import('./ParticleField').then((mod) => setParticleField(() => mod.ParticleField));
+    }
+
     const cycle = setInterval(() => {
       setWordVisible(false);
       setTimeout(() => {
@@ -29,10 +39,12 @@ export function Hero() {
         setWordVisible(true);
       }, 400);
     }, 2600);
+
     return () => clearInterval(cycle);
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDesktop) return;
     const x = (e.clientX / window.innerWidth - 0.5) * 2;
     const y = (e.clientY / window.innerHeight - 0.5) * 2;
     setMousePos({ x, y });
@@ -42,48 +54,59 @@ export function Hero() {
     <section
       ref={heroRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-[100svh] w-full max-w-[100vw] flex items-center justify-center overflow-hidden bg-[#04090F] pt-24 pb-16"
+      className="relative w-full flex items-center justify-center overflow-hidden bg-[#04090F] pt-24 pb-16"
+      style={{ minHeight: '100svh' }}
     >
-      {/* Three.js particles */}
-      <ParticleField className="absolute inset-0 z-0" />
+      {/* Three.js — desktop only */}
+      {isDesktop && ParticleField && (
+        <ParticleField className="absolute inset-0 z-0" />
+      )}
 
       {/* BG image */}
       <div
-        className="absolute inset-0 z-[1] bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 z-[1]"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2940&auto=format&fit=crop')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           opacity: 0.3,
         }}
       />
 
       {/* Gradients */}
-      <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#04090F]/98 via-[#04090F]/80 to-[#04090F]/60 pointer-events-none" />
-      <div className="absolute inset-0 z-[2] bg-gradient-to-t from-[#04090F] via-transparent to-[#04090F]/50 pointer-events-none" />
-
-      {/* Gold ambient light */}
-      <div
-        className="absolute z-[3] pointer-events-none"
-        style={{
-          width: '80vw', height: '80vw',
-          top: `calc(50% + ${mousePos.y * 50}px - 40vw)`,
-          left: `calc(50% + ${mousePos.x * 50}px - 40vw)`,
-          background: 'radial-gradient(circle, rgba(212,175,55,0.07) 0%, rgba(212,175,55,0.02) 35%, transparent 65%)',
-          transition: 'top 1s cubic-bezier(0.22,1,0.36,1), left 1s cubic-bezier(0.22,1,0.36,1)',
-          filter: 'blur(40px)',
-        }}
+      <div className="absolute inset-0 z-[2] pointer-events-none"
+        style={{ background: 'linear-gradient(to right, rgba(4,9,15,0.97) 0%, rgba(4,9,15,0.8) 60%, rgba(4,9,15,0.6) 100%)' }}
+      />
+      <div className="absolute inset-0 z-[2] pointer-events-none"
+        style={{ background: 'linear-gradient(to top, rgba(4,9,15,1) 0%, transparent 50%)' }}
       />
 
+      {/* Desktop-only gold ambient */}
+      {isDesktop && (
+        <div
+          className="absolute z-[3] pointer-events-none"
+          style={{
+            width: '600px', height: '600px',
+            top: `calc(50% + ${mousePos.y * 50}px - 300px)`,
+            left: `calc(50% + ${mousePos.x * 50}px - 300px)`,
+            background: 'radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 65%)',
+            transition: 'top 1s ease, left 1s ease',
+            filter: 'blur(40px)',
+          }}
+        />
+      )}
+
       {/* Content */}
-      <div className="relative z-[10] w-full max-w-[1440px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-6">
+      <div className="relative z-[10] w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-6">
 
         {/* LEFT */}
         <div
           className="flex flex-col items-start text-left w-full lg:w-[58%]"
           style={{
             opacity: mounted ? 1 : 0,
-            transform: mounted ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'opacity 1s ease 0.1s, transform 1s cubic-bezier(0.22,1,0.36,1) 0.1s',
+            transform: mounted ? 'translateY(0)' : 'translateY(24px)',
+            transition: 'opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s',
           }}
         >
           {/* Badge */}
@@ -94,11 +117,11 @@ export function Hero() {
             </span>
           </div>
 
-          {/* Headline — mobile optimised */}
-          <h1 className="font-serif font-semibold text-white tracking-tight mb-5 leading-[1.08]"
-            style={{ fontSize: 'clamp(2.2rem, 8vw, 90px)' }}
+          {/* Headline */}
+          <h1
+            className="font-serif font-semibold text-white tracking-tight mb-5 leading-[1.08]"
+            style={{ fontSize: 'clamp(2.1rem, 7.5vw, 88px)' }}
           >
-            {/* Mobile: 2 satır. Desktop: 3 satır */}
             <span className="block">
               Kurumsal{' '}
               <span
@@ -116,7 +139,7 @@ export function Hero() {
           </h1>
 
           {/* Subtext */}
-          <p className="text-base sm:text-lg text-white/45 max-w-lg mb-8 font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-white/50 max-w-lg mb-8 font-light leading-relaxed">
             Güvenlik, tesis yönetimi ve profesyonel temizlik hizmetlerini tek çatı altında buluşturan, teknoloji odaklı operasyon yönetimi.
           </p>
 
@@ -127,13 +150,9 @@ export function Hero() {
               className="group relative overflow-hidden flex items-center justify-center gap-2 px-6 sm:px-8 h-[50px] sm:h-[56px] rounded-full font-semibold text-[14px] sm:text-[15px] text-black flex-1 sm:flex-none"
               style={{ background: 'linear-gradient(135deg, #D4AF37, #F5D78B, #A07830)' }}
             >
-              <span className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 pointer-events-none"
-                style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)' }}
-              />
               <span className="relative z-10">Teklif Al</span>
               <ArrowRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
-
             <Link
               href="/hizmetler"
               className="group flex items-center justify-center gap-2 px-5 sm:px-8 h-[50px] sm:h-[56px] glass-panel rounded-full font-medium text-white text-[14px] sm:text-[15px] hover:bg-white/[0.08] transition-all duration-300 flex-1 sm:flex-none"
@@ -154,45 +173,41 @@ export function Hero() {
           </div>
         </div>
 
-        {/* RIGHT STAT CARDS — mobile: horizontal row, desktop: vertical */}
+        {/* RIGHT — Mobile: 3 compact cards in a row */}
         <div className="w-full lg:w-[38%]">
-          {/* Mobile: 3 cards in a row */}
-          <div className="flex lg:hidden flex-row gap-2.5 w-full mt-2">
+          {/* Mobile */}
+          <div className="flex lg:hidden flex-row gap-2 w-full mt-2">
             {stats.map((stat, idx) => (
               <div
                 key={idx}
-                className="glass-panel p-3.5 rounded-[16px] flex flex-col items-center justify-center gap-1 flex-1 text-center"
+                className="glass-panel p-3 rounded-2xl flex flex-col items-center justify-center gap-1 flex-1 text-center"
                 style={{
                   opacity: mounted ? 1 : 0,
-                  transition: `opacity 0.8s ease ${0.65 + idx * 0.1}s`,
+                  transition: `opacity 0.8s ease ${0.6 + idx * 0.1}s`,
                 }}
               >
-                <stat.icon className="w-4 h-4 text-gold-400/70" strokeWidth={1.5} />
-                <span className="text-[16px] font-bold text-white tracking-tight leading-none">
-                  {stat.value}
-                </span>
-                <span className="text-[9px] text-white/35 uppercase tracking-wide font-medium leading-tight">
-                  {stat.label}
-                </span>
+                <stat.icon className="w-4 h-4 text-gold-400/70 shrink-0" strokeWidth={1.5} />
+                <span className="text-[15px] font-bold text-white leading-none">{stat.value}</span>
+                <span className="text-[8px] text-white/35 uppercase tracking-wide font-medium leading-tight">{stat.label}</span>
               </div>
             ))}
           </div>
 
-          {/* Desktop: vertical stack */}
+          {/* Desktop */}
           <div className="hidden lg:flex flex-col items-end gap-4">
             {stats.map((stat, idx) => (
               <div
                 key={idx}
-                className="glass-panel p-5 pr-10 rounded-[22px] flex items-center gap-5 w-[300px] hover:bg-white/[0.05] hover:border-white/[0.12] transition-all duration-500 group"
+                className="glass-panel p-5 pr-10 rounded-[22px] flex items-center gap-5 w-[300px] hover:bg-white/[0.05] transition-all duration-500 group"
                 style={{
                   opacity: mounted ? 1 : 0,
                   transform: mounted
                     ? `translate(${mousePos.x * (7 + idx * 3)}px, ${mousePos.y * (5 + idx * 2) + (idx - 1) * -18}px)`
                     : 'translateX(50px)',
-                  transition: `opacity 1s ease ${0.65 + idx * 0.12}s, transform 0.6s cubic-bezier(0.22,1,0.36,1)`,
+                  transition: `opacity 1s ease ${0.65 + idx * 0.12}s, transform 0.6s ease`,
                 }}
               >
-                <div className="w-11 h-11 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 group-hover:border-gold-400/40 group-hover:scale-110 transition-all duration-500">
+                <div className="w-11 h-11 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0 group-hover:border-gold-400/40 transition-all duration-500">
                   <stat.icon className="w-5 h-5 text-white/50 group-hover:text-gold-400 transition-colors" strokeWidth={1.5} />
                 </div>
                 <div>

@@ -30,9 +30,10 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Prevent ANY element from causing horizontal overflow */
-*, *::before, *::after {
+/* Prevent images and media from overflowing */
+img, video, canvas, svg, iframe {
   max-width: 100%;
+  height: auto;
 }
 
 /* Only hide cursor on non-touch devices */
