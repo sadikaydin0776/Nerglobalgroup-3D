@@ -1,0 +1,29 @@
+{
+  "name": "NEW GLOBAL GROUP",
+  "short_name": "New Global",
+  "description": "Profesyonel Güvenlik, Temizlik ve Tesis Yönetimi Hizmetleri",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#04090F",
+  "theme_color": "#D4AF37",
+  "orientation": "portrait",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "screenshots": [
+    {
+      "src": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=390&auto=format&fit=crop",
+      "sizes": "390x844",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "NEW GLOBAL GROUP Ana Sayfa"
+    }
+  ]
+}
