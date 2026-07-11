@@ -40,9 +40,11 @@ export function Loader({ onComplete }: LoaderProps) {
     <div
       className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#04090F]"
       style={{
-        transition: phase === 'reveal' ? 'opacity 0.8s ease 0.5s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s' : 'none',
+        width: '100vw',
+        height: '100dvh',
+        minHeight: '100vh',
+        transition: phase === 'reveal' ? 'opacity 0.8s ease 0.5s' : 'none',
         opacity: phase === 'reveal' ? 0 : 1,
-        transform: phase === 'reveal' ? 'scale(1.04)' : 'scale(1)',
         pointerEvents: phase === 'reveal' ? 'none' : 'all',
       }}
     >

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/Header';
@@ -18,6 +18,14 @@ const playfair = Playfair_Display({
   variable: '--font-playfair',
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: '#04090F',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://newglobalgroup.com.tr'),
@@ -51,7 +59,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr" className={`${inter.variable} ${playfair.variable}`}>
-      <body>
+      <body className="overflow-x-hidden">
         <CustomCursor />
         <SmoothScrollProvider>
           <PageWrapper>

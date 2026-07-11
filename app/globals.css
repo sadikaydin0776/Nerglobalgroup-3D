@@ -14,7 +14,9 @@
 }
 
 html {
-  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  scroll-behavior: auto;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -23,10 +25,22 @@ body {
   font-family: var(--font-inter);
   overflow-x: hidden;
   cursor: none;
+  /* iOS momentum scroll */
+  -webkit-overflow-scrolling: touch;
 }
 
-*, *::before, *::after {
-  cursor: none !important;
+/* Only hide cursor on non-touch devices */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
+/* Touch devices: restore default cursor */
+@media (pointer: coarse) {
+  *, *::before, *::after {
+    cursor: auto !important;
+  }
 }
 
 /* ───── Scrollbar ───── */

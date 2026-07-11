@@ -16,6 +16,14 @@ export function CustomCursor() {
   const [isClick, setIsClick] = useState(false);
 
   useEffect(() => {
+    // Touch devices — hide custom cursor completely
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      if (dotRef.current) dotRef.current.style.display = 'none';
+      if (ringRef.current) ringRef.current.style.display = 'none';
+      if (glowRef.current) glowRef.current.style.display = 'none';
+      return;
+    }
+
     const onMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
     };
