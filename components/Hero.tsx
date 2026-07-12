@@ -62,39 +62,39 @@ export function Hero() {
         <ParticleField className="absolute inset-0 z-0" mobile={!isDesktop} />
       )}
 
-      {/* BG image — slightly brighter */}
+      {/* BG image — full brightness, windows visible */}
       <div
         className="absolute inset-0 z-[1]"
         style={{
           backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: 0.48,
+          opacity: 0.72,
         }}
       />
 
-      {/* Warm amber tint over image — adds colour depth */}
+      {/* Very subtle warm gold tint */}
       <div className="absolute inset-0 z-[1] pointer-events-none"
-        style={{ background: 'linear-gradient(135deg, rgba(180,100,20,0.18) 0%, rgba(212,175,55,0.08) 50%, transparent 100%)' }}
+        style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.06) 0%, transparent 60%)' }}
       />
 
       {/* Video — desktop only */}
       {isDesktop && (
         <video autoPlay muted loop playsInline preload="none"
           className="absolute inset-0 z-[2] w-full h-full object-cover"
-          style={{ opacity: 0.28 }}
+          style={{ opacity: 0.35 }}
           poster="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
         >
           <source src="https://assets.mixkit.co/videos/preview/mixkit-skyscrapers-and-a-highway-at-sunset-34562-large.mp4" type="video/mp4" />
         </video>
       )}
 
-      {/* Dark gradient overlays — less dark than before */}
+      {/* Dark overlays — minimal, just enough for text readability */}
       <div className="absolute inset-0 z-[3] pointer-events-none"
-        style={{ background: 'linear-gradient(to right, rgba(4,9,15,0.92) 0%, rgba(4,9,15,0.65) 55%, rgba(4,9,15,0.35) 100%)' }}
+        style={{ background: 'linear-gradient(to right, rgba(4,9,15,0.88) 0%, rgba(4,9,15,0.50) 45%, rgba(4,9,15,0.15) 100%)' }}
       />
       <div className="absolute inset-0 z-[3] pointer-events-none"
-        style={{ background: 'linear-gradient(to top, rgba(4,9,15,1) 0%, transparent 55%)' }}
+        style={{ background: 'linear-gradient(to top, rgba(4,9,15,0.95) 0%, rgba(4,9,15,0.3) 30%, transparent 60%)' }}
       />
 
       {/* Gradient mesh orbs — more vibrant */}
