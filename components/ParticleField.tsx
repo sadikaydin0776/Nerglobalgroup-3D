@@ -52,10 +52,10 @@ function NeuralNet({ mouse, mobile = false }: { mouse: React.MutableRefObject<Mo
   const dotMat = useMemo(
     () =>
       new THREE.PointsMaterial({
-        color: '#F5D78B',
-        size: mobile ? 0.10 : 0.09,
+        color: '#FFE566',
+        size: mobile ? 0.13 : 0.11,
         transparent: true,
-        opacity: 0.9,
+        opacity: 1.0,
         sizeAttenuation: true,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
@@ -75,9 +75,9 @@ function NeuralNet({ mouse, mobile = false }: { mouse: React.MutableRefObject<Mo
   const lineMat = useMemo(
     () =>
       new THREE.LineBasicMaterial({
-        color: '#D4AF37',
+        color: '#FFD700',
         transparent: true,
-        opacity: mobile ? 0.28 : 0.22,
+        opacity: mobile ? 0.38 : 0.30,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
       }),
@@ -176,10 +176,10 @@ function AmbientParticles({ mouse, mobile = false }: { mouse: React.MutableRefOb
   const mat = useMemo(
     () =>
       new THREE.PointsMaterial({
-        color: '#F5D78B',
-        size: mobile ? 0.035 : 0.028,
+        color: '#FFE566',
+        size: mobile ? 0.045 : 0.035,
         transparent: true,
-        opacity: mobile ? 0.45 : 0.35,
+        opacity: mobile ? 0.55 : 0.45,
         sizeAttenuation: true,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
@@ -219,10 +219,10 @@ function GridPlane({ mouse }: { mouse: React.MutableRefObject<MouseRef> }) {
   const mat = useMemo(
     () =>
       new THREE.MeshBasicMaterial({
-        color: '#D4AF37',
+        color: '#FFD700',
         wireframe: true,
         transparent: true,
-        opacity: 0.07,
+        opacity: 0.10,
       }),
     []
   );
