@@ -62,59 +62,67 @@ export function Hero() {
         <ParticleField className="absolute inset-0 z-0" mobile={!isDesktop} />
       )}
 
-      {/* BG video (muted, autoplay, loop) */}
-      {/* Fallback BG for all devices */}
+      {/* BG image — slightly brighter */}
       <div
         className="absolute inset-0 z-[1]"
         style={{
           backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: 0.3,
+          opacity: 0.48,
         }}
       />
-      {/* Video — desktop only, loads lazily */}
+
+      {/* Warm amber tint over image — adds colour depth */}
+      <div className="absolute inset-0 z-[1] pointer-events-none"
+        style={{ background: 'linear-gradient(135deg, rgba(180,100,20,0.18) 0%, rgba(212,175,55,0.08) 50%, transparent 100%)' }}
+      />
+
+      {/* Video — desktop only */}
       {isDesktop && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
+        <video autoPlay muted loop playsInline preload="none"
           className="absolute inset-0 z-[2] w-full h-full object-cover"
-          style={{ opacity: 0.22 }}
+          style={{ opacity: 0.28 }}
           poster="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
         >
           <source src="https://assets.mixkit.co/videos/preview/mixkit-skyscrapers-and-a-highway-at-sunset-34562-large.mp4" type="video/mp4" />
         </video>
       )}
 
-      {/* Gradients */}
-      <div className="absolute inset-0 z-[2] pointer-events-none"
-        style={{ background: 'linear-gradient(to right, rgba(4,9,15,0.97) 0%, rgba(4,9,15,0.8) 60%, rgba(4,9,15,0.6) 100%)' }}
+      {/* Dark gradient overlays — less dark than before */}
+      <div className="absolute inset-0 z-[3] pointer-events-none"
+        style={{ background: 'linear-gradient(to right, rgba(4,9,15,0.92) 0%, rgba(4,9,15,0.65) 55%, rgba(4,9,15,0.35) 100%)' }}
       />
-      <div className="absolute inset-0 z-[2] pointer-events-none"
-        style={{ background: 'linear-gradient(to top, rgba(4,9,15,1) 0%, transparent 50%)' }}
+      <div className="absolute inset-0 z-[3] pointer-events-none"
+        style={{ background: 'linear-gradient(to top, rgba(4,9,15,1) 0%, transparent 55%)' }}
       />
 
-      {/* Gradient mesh orbs */}
-      <div className="absolute z-[2] pointer-events-none" style={{
-        top: '15%', left: '55%', width: '500px', height: '500px',
-        background: 'radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 60%)',
-        filter: 'blur(60px)',
+      {/* Gradient mesh orbs — more vibrant */}
+      <div className="absolute z-[3] pointer-events-none" style={{
+        top: '10%', left: '50%', width: '600px', height: '600px',
+        background: 'radial-gradient(circle, rgba(212,175,55,0.14) 0%, rgba(200,140,40,0.06) 40%, transparent 65%)',
+        filter: 'blur(50px)',
         animation: 'orbFloat1 18s ease-in-out infinite',
       }} />
-      <div className="absolute z-[2] pointer-events-none" style={{
-        top: '50%', left: '30%', width: '400px', height: '400px',
-        background: 'radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 60%)',
-        filter: 'blur(80px)',
+      <div className="absolute z-[3] pointer-events-none" style={{
+        top: '45%', left: '25%', width: '450px', height: '450px',
+        background: 'radial-gradient(circle, rgba(251,146,60,0.08) 0%, rgba(59,130,246,0.04) 50%, transparent 65%)',
+        filter: 'blur(70px)',
         animation: 'orbFloat2 22s ease-in-out infinite',
       }} />
-      <div className="absolute z-[2] pointer-events-none" style={{
-        bottom: '10%', right: '20%', width: '350px', height: '350px',
-        background: 'radial-gradient(circle, rgba(139,92,246,0.05) 0%, transparent 60%)',
-        filter: 'blur(70px)',
+      <div className="absolute z-[3] pointer-events-none" style={{
+        bottom: '5%', right: '15%', width: '400px', height: '400px',
+        background: 'radial-gradient(circle, rgba(212,175,55,0.10) 0%, rgba(139,92,246,0.05) 50%, transparent 65%)',
+        filter: 'blur(60px)',
         animation: 'orbFloat3 16s ease-in-out infinite',
+      }} />
+      {/* Extra gold ray top-right */}
+      <div className="absolute z-[3] pointer-events-none" style={{
+        top: '-10%', right: '-5%', width: '500px', height: '500px',
+        background: 'radial-gradient(ellipse at center, rgba(212,175,55,0.12) 0%, transparent 60%)',
+        filter: 'blur(40px)',
+        transform: 'rotate(-20deg)',
+        animation: 'orbFloat1 25s ease-in-out infinite reverse',
       }} />
 
       {/* Desktop-only gold ambient */}
